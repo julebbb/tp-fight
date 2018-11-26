@@ -1,12 +1,23 @@
 <?php
 
-include "../model/connect.php";
+include "../model/CharacterManager.php";
+
+function chargerClasse($classname){
+    if(file_exists('../model/'. $classname.'.php')) {
+        require '../model/'. $classname.'.php';
+    }
+    else {
+        require '../entities/' . $classname . '.php';
+    }
+}
+spl_autoload_register('chargerClasse');
+
+$db = Database::DB();
+
+$characterManager = new CharacterManager($db);
+
+
+$characters = $characterManager->getCharacters();
+
 include "../views/indexVue.php";
 
-$db = connect()->query('SELECT id, name, descript, DATE_FORMAT(deadline, "%d/%m/%Y") AS deadline FROM projects');
-
-
-echo "<pre>";
-print_r($db);
-echo "</pre>";
- ?>
