@@ -25,6 +25,7 @@
 ?>
     <p><?php echo $character->getName(); ?></p>
     <p><?php echo $character->getDamage(); ?></p>
+    <a href="index.php?hit=<?php echo $character->getId()?>">Hit !!</a>
 <?php
  }
    include("template/footer.php")

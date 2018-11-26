@@ -47,4 +47,9 @@ class CharacterManager {
     $search = $query->fetch();
     return $search;
   }
+
+  public function fight($id) {
+    $query = $this->getDb()->prepare('UPDATE characters SET damage = damage + 5 WHERE id=?');
+    $query->execute(array($id));
+  }
 }

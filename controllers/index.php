@@ -2,7 +2,7 @@
 
 include "../model/CharacterManager.php";
 
-function chargerClasse($classname){
+function loadClasse($classname){
     if(file_exists('../model/'. $classname.'.php')) {
         require '../model/'. $classname.'.php';
     }
@@ -10,7 +10,7 @@ function chargerClasse($classname){
         require '../entities/' . $classname . '.php';
     }
 }
-spl_autoload_register('chargerClasse');
+spl_autoload_register('loadClasse');
 
 $db = Database::DB();
 $characterManager = new CharacterManager($db);
@@ -18,9 +18,9 @@ $characterManager = new CharacterManager($db);
 
 $characters = $characterManager->getCharacters();
 
+//Add a character
 if (isset($_POST['name'])  AND !empty($_POST['name'])) {
     $name = strip_tags($_POST['name']);
-    echo $name;
     $check = $characterManager->checkCharacter($name);
     if ($check == 0) {
         echo "Perfect !";
@@ -32,6 +32,15 @@ if (isset($_POST['name'])  AND !empty($_POST['name'])) {
         $characterManager->addCharacter($newCharacter);
 
     }
+    
+}
+
+//Fight character
+if (isset($_GET['hit'])  AND !empty($_GET['hit'])) {
+    $hit = (int) $_GET['hit'];
+
+    $characterManager->fight($hit);
+    header('Location: index.php');
     
 }
 include "../views/indexVue.php";
