@@ -28,4 +28,23 @@ class CharacterManager {
 
     return $arrayOfCharacters;
   }
+
+  public function addCharacter(Character $character) {
+    $query = $this->getDb()->prepare('INSERT INTO characters(name, damage) VALUES (:name, :damage)');
+    $query->execute([
+      "name" => $character->getName(),
+      "damage" => $character->getDamage()
+    ]);
+
+    return header('Location: index.php');
+
+  }
+
+  public function checkCharacter($name) {
+    $query = $this->getDb()->prepare('SELECT id FROM characters WHERE name=?');
+    $query->execute(array($name));
+    
+    $search = $query->fetch();
+    return $search;
+  }
 }
