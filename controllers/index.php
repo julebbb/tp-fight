@@ -38,9 +38,9 @@ if (isset($_POST['name'])  AND !empty($_POST['name'])) {
 //Fight character
 if (isset($_GET['hit'])  AND !empty($_GET['hit'])) {
     $hit = (int) $_GET['hit'];
-
+    
     $characterManager->fight($hit);
-    header('Location: index.php');
+    $characterManager->delete($hit);
     
 }
 include "../views/indexVue.php";

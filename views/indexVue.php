@@ -21,6 +21,15 @@
   </section>
 <?php
 
+    $keys = array_keys($characters);
+$last_key = $keys[count($keys)-1];
+$miaou = $characters[$last_key];
+
+echo $miaou->getName();
+
+unset($characters[$last_key]);
+
+
  foreach($characters as $character) {
 ?>
     <p><?php echo $character->getName(); ?></p>

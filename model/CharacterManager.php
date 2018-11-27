@@ -51,5 +51,14 @@ class CharacterManager {
   public function fight($id) {
     $query = $this->getDb()->prepare('UPDATE characters SET damage = damage + 5 WHERE id=?');
     $query->execute(array($id));
+    return header('Location: index.php');
+
+  }
+
+  public function delete($id) {
+    $query = $this->getDb()->prepare('DELETE FROM characters WHERE id =? AND damage >= 100');
+    $query->execute(array($id));
+    return header('Location: index.php');
+    
   }
 }
