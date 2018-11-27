@@ -25,14 +25,15 @@ if (isset($_POST['name'])  AND !empty($_POST['name'])) {
     $name = strip_tags($_POST['name']);
     $check = $characterManager->checkCharacter($name);
     if ($check == 0) {
-        echo "Perfect !";
         $newCharacter = new Character([
         "name" => $name,
         "damage" => 0
         ]);
 
         $characterManager->addCharacter($newCharacter);
-        echo "miaou";
+
+        $info = "Votre personnage a bien été crée !";
+        header('Refresh: 5;url=index.php');
     } else {
         $info = "Le nom du personnage est déjà pris !";
     }
@@ -42,7 +43,7 @@ if (isset($_POST['name'])  AND !empty($_POST['name'])) {
 //Fight character
 if (isset($_GET['hit'])  AND !empty($_GET['hit'])) {
     $hit = (int) $_GET['hit'];
-
+    $info = "Vous frappez !";
     $characterManager->fight($hit);
     $characterManager->delete($hit);
     

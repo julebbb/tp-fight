@@ -36,7 +36,7 @@ class CharacterManager {
       "damage" => $character->getDamage()
     ]);
 
-    return header('Location: index.php');
+    
 
   }
 
