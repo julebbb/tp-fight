@@ -4,7 +4,7 @@
 
 <section class="addform">
     <div class="">
-      <h4>Ajouter un personnage :</h4>
+      <h2>Ajouter un personnage :</h2>
       <?php if (!empty($send)) {
          echo "<p>" .  $send . "</p>";
       } ?>
@@ -16,26 +16,30 @@
        <input type="submit" name="envoie" class="btn btn-primary  d-block" value="Crée">
      </form>
 
+      <p><?php echo $info;?></p>
+
+
     </div>
 
   </section>
-<?php
-
-    $keys = array_keys($characters);
-$last_key = $keys[count($keys)-1];
-$miaou = $characters[$last_key];
-
-echo $miaou->getName();
-
-unset($characters[$last_key]);
+  <section>
+      <h3>Infos de votre personnage :</h3>
+      <p>Name : <?php echo $lastCharacter->getName()?></p>
+      <p>Damage : <?php echo $lastCharacter->getDamage()?></p>
 
 
- foreach($characters as $character) {
-?>
-    <p><?php echo $character->getName(); ?></p>
-    <p><?php echo $character->getDamage(); ?></p>
-    <a href="index.php?hit=<?php echo $character->getId()?>">Hit !!</a>
-<?php
- }
-   include("template/footer.php")
-?>
+      <h3>Autres personnages :</h3>
+    <?php
+      unset($characters[$last_key]);  
+      foreach($characters as $character) {
+    ?>
+      <p>Name : <?php echo $character->getName(); ?></p>
+      <p>Damage : <?php echo $character->getDamage(); ?></p>
+      <a href="index.php?hit=<?php echo $character->getId()?>">Hit !!</a>
+    <?php
+    }
+      include("template/footer.php")
+    ?>
+  </section>
+  
+

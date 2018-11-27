@@ -51,8 +51,8 @@ class CharacterManager {
   public function fight($id) {
     $query = $this->getDb()->prepare('UPDATE characters SET damage = damage + 5 WHERE id=?');
     $query->execute(array($id));
-    return header('Location: index.php');
-
+    header('Location: index.php');
+    return "Le personnage a bien été ajouté !";
   }
 
   public function delete($id) {

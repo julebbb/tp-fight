@@ -2,6 +2,8 @@
 
 include "../model/CharacterManager.php";
 
+$info = null;
+
 function loadClasse($classname){
     if(file_exists('../model/'. $classname.'.php')) {
         require '../model/'. $classname.'.php';
@@ -30,7 +32,9 @@ if (isset($_POST['name'])  AND !empty($_POST['name'])) {
         ]);
 
         $characterManager->addCharacter($newCharacter);
-
+        echo "miaou";
+    } else {
+        $info = "Le nom du personnage est déjà pris !";
     }
     
 }
@@ -38,10 +42,15 @@ if (isset($_POST['name'])  AND !empty($_POST['name'])) {
 //Fight character
 if (isset($_GET['hit'])  AND !empty($_GET['hit'])) {
     $hit = (int) $_GET['hit'];
-    
+
     $characterManager->fight($hit);
     $characterManager->delete($hit);
     
 }
+
+$keys = array_keys($characters);
+$last_key = $keys[count($keys)-1];
+$lastCharacter = $characters[$last_key];
+
 include "../views/indexVue.php";
 
