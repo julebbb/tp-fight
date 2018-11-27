@@ -94,7 +94,19 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+    header {
+        display: flex;
+        flex-flow: wrap;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5em;
+        color: chocolate;
+    }
 
+    header .fas {
+        font-size: 50px;
+    }
 
 
 /* ##################################################################### */
@@ -126,11 +138,6 @@ textarea {
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
 
-}
-
-
-header {
-    color: green;
 }
 
 

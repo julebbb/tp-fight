@@ -28,4 +28,37 @@ class CharacterManager {
 
     return $arrayOfCharacters;
   }
+
+  public function addCharacter(Character $character) {
+    $query = $this->getDb()->prepare('INSERT INTO characters(name, damage) VALUES (:name, :damage)');
+    $query->execute([
+      "name" => $character->getName(),
+      "damage" => $character->getDamage()
+    ]);
+
+    
+
+  }
+
+  public function checkCharacter($name) {
+    $query = $this->getDb()->prepare('SELECT id FROM characters WHERE name=?');
+    $query->execute(array($name));
+    
+    $search = $query->fetch();
+    return $search;
+  }
+
+  public function fight($id) {
+    $query = $this->getDb()->prepare('UPDATE characters SET damage = damage + 5 WHERE id=?');
+    $query->execute(array($id));
+    header('Location: index.php');
+    return "Le personnage a bien été ajouté !";
+  }
+
+  public function delete($id) {
+    $query = $this->getDb()->prepare('DELETE FROM characters WHERE id =? AND damage >= 100');
+    $query->execute(array($id));
+    return header('Location: index.php');
+    
+  }
 }
